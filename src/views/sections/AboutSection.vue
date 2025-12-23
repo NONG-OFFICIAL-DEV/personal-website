@@ -27,20 +27,39 @@
           functional, but delightful to use.
         </p>
 
-        <v-row class="mt-4">
-          <v-col cols="4">
-            <div class="text-h4 font-weight-black text-primary">3+</div>
-            <div class="text-caption text-uppercase">Years Exp.</div>
-          </v-col>
-          <v-col cols="4">
-            <div class="text-h4 font-weight-black text-primary">15+</div>
-            <div class="text-caption text-uppercase">Projects</div>
-          </v-col>
-          <v-col cols="4">
-            <div class="text-h4 font-weight-black text-primary">5+</div>
-            <div class="text-caption text-uppercase">Clients</div>
-          </v-col>
-        </v-row>
+        <v-card
+          variant="outlined"
+          class="mt-8 pa-4 rounded-lg border-thin bg-surface"
+        >
+          <v-row class="text-center" no-gutters>
+            <v-col cols="4">
+              <div class="text-h4 font-weight-black text-primary">3+</div>
+              <div
+                class="text-caption text-uppercase font-weight-bold text-medium-emphasis"
+              >
+                Years Exp.
+              </div>
+            </v-col>
+
+            <v-col cols="4">
+              <div class="text-h4 font-weight-black text-primary">15+</div>
+              <div
+                class="text-caption text-uppercase font-weight-bold text-medium-emphasis"
+              >
+                Projects
+              </div>
+            </v-col>
+
+            <v-col cols="4">
+              <div class="text-h4 font-weight-black text-primary">10+</div>
+              <div
+                class="text-caption text-uppercase font-weight-bold text-medium-emphasis"
+              >
+                Tech Stack
+              </div>
+            </v-col>
+          </v-row>
+        </v-card>
       </v-col>
 
       <v-col cols="12" md="7">

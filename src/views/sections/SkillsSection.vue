@@ -89,10 +89,10 @@ const skills = [
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
   },
   {
-    name: "JavaScript",
+    name: "Bootstrap",
     category: "frontend",
     level: "Advanced",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
   },
 
   // Backend
@@ -114,6 +114,12 @@ const skills = [
     level: "Intermediate",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
   },
+  {
+    name: "Pyton",
+    category: "backend",
+    level: "Intermediate",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+  },
 
   // Tools & DB
   {
@@ -121,6 +127,12 @@ const skills = [
     category: "tools",
     level: "Advanced",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+  },
+  {
+    name: "PostgreSQL",
+    category: "tools",
+    level: "Advanced",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
   },
   {
     name: "Docker",
