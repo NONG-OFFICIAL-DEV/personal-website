@@ -44,7 +44,7 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/business-vue-web:latest
             docker run -d \
               --name business-vue-web \
-              -p 90:90 \
+              -p 9090:9090 \
               --restart always \
               ${{ secrets.DOCKERHUB_USERNAME }}/business-vue-web:latest
 

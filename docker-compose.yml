@@ -5,5 +5,5 @@ services:
     image: business-vue-web
     container_name: business-vue-web
     ports:
-      - "90:90"
+      - "9090:9090"
     restart: always
