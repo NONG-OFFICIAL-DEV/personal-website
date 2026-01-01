@@ -1,3 +1,24 @@
+<script setup>
+const socialButtons = [
+  {
+    icon: "github",
+    link: "https://github.com/Nong-Phloeut",
+  },
+  {
+    icon: "linkedin",
+    link: "https://github.com/Nong-Phloeut",
+  },
+  {
+    icon: "twitter",
+    link: "https://github.com/Nong-Phloeut",
+  },
+  {
+    icon: "instagram",
+    link: "https://github.com/Nong-Phloeut",
+  },
+];
+</script>
+
 <template>
   <v-container id="home" class="fill-height hero-section" fluid>
     <div class="blob-wrapper">
@@ -64,12 +85,14 @@
           </p>
           <div class="d-flex gap-3">
             <v-btn
-              v-for="icon in ['github', 'linkedin', 'twitter', 'instagram']"
+              v-for="icon in socialButtons"
               :key="icon"
-              :icon="`mdi-${icon}`"
+              :icon="`mdi-${icon.icon}`"
               variant="tonal"
               color="primary"
               class="social-button"
+              :href="icon.link"
+              target="_blank"
             />
           </div>
         </div>
@@ -450,7 +473,6 @@
 .hero-section,
 .blob-wrapper {
   max-width: 100vw;
-  overflow-x: hidden;
 }
 
 /* ---------- Improve tap experience on mobile ---------- */

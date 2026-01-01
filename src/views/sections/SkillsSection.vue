@@ -157,25 +157,3 @@ const groupedSkills = computed(() => {
   }, {});
 });
 </script>
-
-<style scoped>
-.skill-card {
-  border: 1px solid rgba(var(--v-border-color), 0.1);
-  background: rgba(var(--v-theme-surface), 0.8);
-  transition: all 0.3s ease-in-out;
-}
-
-.skill-card.on-hover {
-  transform: translateY(-8px);
-  border-color: rgb(var(--v-theme-primary));
-}
-
-.v-avatar img {
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
-}
-
-.on-hover .v-avatar img {
-  filter: grayscale(0%);
-}
-</style>
