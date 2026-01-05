@@ -2,6 +2,8 @@ www.nongofficial.store {
     root * /usr/share/caddy
     file_server
     encode gzip
+
+    # SPA fallback for Vue Router (history mode)
     try_files {path} {path}/ /index.html
 
     log {

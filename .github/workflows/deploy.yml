@@ -38,13 +38,17 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-
+            # Stop and remove old container
             docker stop business-vue-web || true
             docker rm business-vue-web || true
+
+            # Pull latest image
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/business-vue-web:latest
+
+            # Run container with correct ports
             docker run -d \
               --name business-vue-web \
-              -p 9090:9090 \
+              -p 80:80 \
+              -p 443:443 \
               --restart always \
               ${{ secrets.DOCKERHUB_USERNAME }}/business-vue-web:latest
-

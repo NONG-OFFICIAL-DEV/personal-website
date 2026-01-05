@@ -5,15 +5,6 @@ services:
     build: .
     container_name: vue-caddy
     ports:
-      - "80:80"       # HTTP
-      - "443:443"     # HTTPS
+      - "80:80"
+      - "443:443"
     restart: always
-    volumes:
-      - ./dist:/usr/share/caddy    # Vue build output
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data           # Caddy data (certs)
-      - caddy_config:/config       # Caddy config
-
-volumes:
-  caddy_data:
-  caddy_config:
