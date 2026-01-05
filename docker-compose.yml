@@ -2,8 +2,18 @@ version: "3.8"
 
 services:
   vue-app:
-    image: business-vue-web
-    container_name: business-vue-web
+    build: .
+    container_name: vue-caddy
     ports:
-      - "9090:9090"
+      - "80:80"       # HTTP
+      - "443:443"     # HTTPS
     restart: always
+    volumes:
+      - ./dist:/usr/share/caddy    # Vue build output
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data           # Caddy data (certs)
+      - caddy_config:/config       # Caddy config
+
+volumes:
+  caddy_data:
+  caddy_config:

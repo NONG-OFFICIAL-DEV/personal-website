@@ -9,16 +9,12 @@ COPY . .
 RUN npm run build
 
 # ---------- Production stage ----------
-FROM nginx:alpine
+FROM caddy:2.8.0-alpine
 
-# Remove default config
-RUN rm /etc/nginx/conf.d/default.conf
+# Copy Vue build files
+COPY --from=build /app/dist /usr/share/caddy
 
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy Caddyfile
+COPY Caddyfile /etc/caddy/Caddyfile
 
-# Copy build files
-COPY --from=build /app/dist /usr/share/nginx/html
-
-EXPOSE 9090
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80 443
