@@ -3,11 +3,12 @@ www.nongofficial.store {
     file_server
     encode gzip
 
-    # SPA fallback for Vue Router (history mode)
+    # SPA fallback for Vue Router
     try_files {path} {path}/ /index.html
 
+    # Logging
     log {
         output file /var/log/caddy/www-nongofficial.log
-        format single_field common_log
+        format json
     }
 }
