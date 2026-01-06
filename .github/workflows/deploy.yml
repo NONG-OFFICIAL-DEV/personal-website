@@ -58,11 +58,11 @@ jobs:
 
             docker run -d --name backend --restart always nongdev/node-backend:latest
             docker run -d --name frontend -p 80:80 --restart always nongdev/vue-frontend:latest
-            docker run -d --name caddy -p 443:443 \
-              -v ~/personal-website/caddy/Caddyfile:/etc/caddy/Caddyfile \
+            docker run -d --name caddy -p 80:80 -p 443:443 \
+              -v /home/ubuntu/personal-website/caddy/Caddyfile:/etc/caddy/Caddyfile \
               -v caddy_data:/data \
               -v caddy_config:/config \
-              --link frontend:frontend \
-              --link backend:backend \
+              --network my-net \
               --restart always \
               caddy:2-alpine
+
