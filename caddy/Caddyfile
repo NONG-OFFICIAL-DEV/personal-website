@@ -6,6 +6,11 @@ www.nongofficial.store {
     # SPA fallback for Vue Router
     try_files {path} {path}/ /index.html
 
+    # Backend API
+	handle_path /api/* {
+		reverse_proxy backend:9090
+	}
+
     # Logging
     log {
         output file /var/log/caddy/www-nongofficial.log

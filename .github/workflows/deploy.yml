@@ -19,36 +19,50 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Push Docker image
-        uses: docker/build-push-action@v4
+      - name: Build & push frontend
+        uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/business-vue-web:latest
+          tags: nongphloeut/vue-frontend:latest
+
+      - name: Build & push backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: nongphloeut/node-backend:latest
 
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
 
     steps:
-      - name: SSH to Server and Pull Docker Image
+      - name: SSH deploy
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Stop and remove old container
-            docker stop business-vue-web || true
-            docker rm business-vue-web || true
+            docker stop frontend || true
+            docker rm frontend || true
+            docker stop backend || true
+            docker rm backend || true
+            docker stop caddy || true
+            docker rm caddy || true
 
-            # Pull latest image
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/business-vue-web:latest
+            docker pull nongphloeut/vue-frontend:latest
+            docker pull nongphloeut/node-backend:latest
+            docker pull caddy:2-alpine
 
-            # Run container with correct ports
-            docker run -d \
-              --name business-vue-web \
-              -p 80:80 \
-              -p 443:443 \
+            docker run -d --name backend --restart always nongphloeut/node-backend:latest
+            docker run -d --name frontend -p 80:80 --restart always nongphloeut/vue-frontend:latest
+            docker run -d --name caddy -p 443:443 \
+              -v ~/personal-website/caddy/Caddyfile:/etc/caddy/Caddyfile \
+              -v caddy_data:/data \
+              -v caddy_config:/config \
+              --link frontend:frontend \
+              --link backend:backend \
               --restart always \
-              ${{ secrets.DOCKERHUB_USERNAME }}/business-vue-web:latest
+              caddy:2-alpine

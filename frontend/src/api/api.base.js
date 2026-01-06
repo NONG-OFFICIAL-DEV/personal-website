@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create Axios instance
 const apiClient = axios.create({
-  baseURL: "http://localhost:3000/api", // Node.js backend
+  baseURL: "https://www.nongofficial.store/api", // Node.js backend
   headers: {
     "Content-Type": "application/json",
   },

@@ -5,11 +5,15 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = 9090;
 
 // Enable CORS for your Vue frontend
 app.use(cors());
 app.use(bodyParser.json());
+
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
+});
 
 // Endpoint to save content
 app.post("/api/save-content", (req, res) => {
