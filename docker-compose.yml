@@ -7,7 +7,7 @@ services:
     build: ./backend
     restart: unless-stopped
 
-  caddy:
+  web:
     image: caddy:2-alpine
     ports:
       - "80:80"

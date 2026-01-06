@@ -49,8 +49,8 @@ jobs:
             docker rm frontend || true
             docker stop backend || true
             docker rm backend || true
-            docker stop caddy || true
-            docker rm caddy || true
+            docker stop web || true
+            docker rm web || true
 
             docker pull nongdev/vue-frontend:latest
             docker pull nongdev/node-backend:latest
@@ -58,9 +58,10 @@ jobs:
 
             docker run -d --name backend --restart always nongdev/node-backend:latest
             docker run -d --name frontend -p 80:80 --restart always nongdev/vue-frontend:latest
-            
+
             # Run Caddy (mount Vue build)
-            docker run -d --name caddy -p 80:80 -p 443:443 \
+            
+            docker run -d --name web -p 80:80 -p 443:443 \
               -v /home/ubuntu/personal-website/caddy/Caddyfile:/etc/caddy/Caddyfile \
               -v /home/ubuntu/personal-website/frontend/dist:/usr/share/caddy \
               -v caddy_data:/data \
