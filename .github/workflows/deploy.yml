@@ -56,6 +56,9 @@ jobs:
             docker pull nongdev/node-backend:latest
             docker pull caddy:2-alpine
 
+            # Create Docker network if not exists
+            docker network create my-net || true
+
             docker run -d --name backend --restart always nongdev/node-backend:latest
             docker run -d --name frontend -p 80:80 --restart always nongdev/vue-frontend:latest
 
