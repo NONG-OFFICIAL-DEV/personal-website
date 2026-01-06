@@ -1,22 +1,22 @@
 <script setup>
-const socialButtons = [
-  {
-    icon: "github",
-    link: "https://github.com/Nong-Phloeut",
+import { ref, onMounted } from "vue";
+import { loadContent } from "../../api/content.api";
+
+const content = ref({
+  home: {
+    title: "",
+    subtitle: "",
+    social: [],
   },
-  {
-    icon: "linkedin",
-    link: "https://github.com/Nong-Phloeut",
-  },
-  {
-    icon: "twitter",
-    link: "https://github.com/Nong-Phloeut",
-  },
-  {
-    icon: "instagram",
-    link: "https://github.com/Nong-Phloeut",
-  },
-];
+});
+
+// Fetch content from JSON
+onMounted(async () => {
+  const data = await loadContent();
+  if (data) {
+    content.value = data;
+  }
+});
 </script>
 
 <template>
@@ -42,15 +42,11 @@ const socialButtons = [
         </v-chip>
 
         <h1 class="display-title mb-4">
-          Hi, I'm
-          <span class="text-gradient">Nong</span>
+          {{ content.home.title }}
         </h1>
 
         <p class="text-subtitle mb-10 animate-fade-up">
-          I craft
-          <span class="font-weight-bold">scalable web applications</span> using
-          <span class="tech-link">Vue 3</span> and
-          <span class="tech-link">Laravel</span>.
+          {{ content.home.subtitle }}
         </p>
 
         <div class="d-flex flex-wrap gap-4 mb-12 animate-fade-up-delayed">
@@ -78,15 +74,13 @@ const socialButtons = [
         </div>
 
         <div class="social-wrapper animate-fade-up-delayed-2">
-          <p
-            class="text-caption font-weight-bold text-uppercase text-disabled mb-3"
-          >
+          <p class="text-caption font-weight-bold text-uppercase text-disabled mb-3">
             Connect with me
           </p>
           <div class="d-flex gap-3">
             <v-btn
-              v-for="icon in socialButtons"
-              :key="icon"
+              v-for="(icon, index) in content.home.social"
+              :key="index"
               :icon="`mdi-${icon.icon}`"
               variant="tonal"
               color="primary"
@@ -124,6 +118,7 @@ const socialButtons = [
     </v-row>
   </v-container>
 </template>
+
 
 <style scoped>
 .hero-section {

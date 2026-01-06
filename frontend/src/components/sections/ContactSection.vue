@@ -16,7 +16,7 @@
             </v-avatar>
             <div>
               <div class="text-caption text-medium-emphasis">Email Me</div>
-              <div class="text-body-1 font-weight-bold">phloeutnong@gmail.com</div>
+              <div class="text-body-1 font-weight-bold">{{contact.email}}</div>
             </div>
           </div>
           
@@ -26,7 +26,7 @@
             </v-avatar>
             <div>
               <div class="text-caption text-medium-emphasis">Contact Me</div>
-              <div class="text-body-1 font-weight-bold">099876553</div>
+              <div class="text-body-1 font-weight-bold">{{contact.phone}}</div>
             </div>
           </div>
 
@@ -36,7 +36,7 @@
             </v-avatar>
             <div>
               <div class="text-caption text-medium-emphasis">Location</div>
-              <div class="text-body-1 font-weight-bold">Phnom Penh, Cambodia</div>
+              <div class="text-body-1 font-weight-bold">{{contact.location}}</div>
             </div>
           </div>
 
@@ -109,15 +109,23 @@
       </v-col>
     </v-row>
 
-    <v-snackbar v-model="success" color="success" rounded="pill">
+    <v-snackbar v-model="success" color="success" rounded="lg">
       Message sent successfully!
     </v-snackbar>
   </v-container>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive,onMounted } from 'vue'
 
+import { loadContent } from "../../api/content.api";
+onMounted(async () => {
+  const data = await loadContent();
+  if (data) {
+    contact.value = data.contact;
+  }
+});
+const contact = ref({});
 const isFormValid = ref(false)
 const loading = ref(false)
 const success = ref(false)

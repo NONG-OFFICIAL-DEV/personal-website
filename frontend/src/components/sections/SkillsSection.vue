@@ -64,93 +64,22 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed ,onMounted} from "vue";
 
+import { loadContent } from "../../api/content.api";
 const activeTab = ref("frontend");
 
-const skills = [
-  // Frontend
-  {
-    name: "Vue 3",
-    category: "frontend",
-    level: "Expert",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
-  },
-  {
-    name: "Vuetify",
-    category: "frontend",
-    level: "Advanced",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuetify/vuetify-original.svg",
-  },
-  {
-    name: "JavaScript",
-    category: "frontend",
-    level: "Advanced",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-  },
-  {
-    name: "Bootstrap",
-    category: "frontend",
-    level: "Advanced",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
-  },
-
-  // Backend
-  {
-    name: "Laravel",
-    category: "backend",
-    level: "Expert",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
-  },
-  {
-    name: "PHP",
-    category: "backend",
-    level: "Expert",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
-  },
-  {
-    name: "Node.js",
-    category: "backend",
-    level: "Intermediate",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    name: "Pyton",
-    category: "backend",
-    level: "Intermediate",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-  },
-
-  // Tools & DB
-  {
-    name: "MySQL",
-    category: "tools",
-    level: "Advanced",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-  },
-  {
-    name: "PostgreSQL",
-    category: "tools",
-    level: "Advanced",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-  },
-  {
-    name: "Docker",
-    category: "tools",
-    level: "Intermediate",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-  },
-  {
-    name: "Git",
-    category: "tools",
-    level: "Advanced",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-  },
-];
+onMounted(async () => {
+  const data = await loadContent();
+  if (data) {
+    skills.value = data.skills;
+  }
+});
+const skills = ref([]);
 
 // Logic to group skills by their category property
 const groupedSkills = computed(() => {
-  return skills.reduce((acc, skill) => {
+  return skills.value.reduce((acc, skill) => {
     if (!acc[skill.category]) acc[skill.category] = [];
     acc[skill.category].push(skill);
     return acc;

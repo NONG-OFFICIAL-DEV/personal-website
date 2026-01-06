@@ -1,45 +1,14 @@
 <script setup>
-const history = [
-  {
-    year: "Feb 2024 - PRESENT",
-    title: "Full Stack Developer",
-    company: "Sourceamax Asia",
-    link: "https://www.sourceamax.asia/",
-    description:
-      "Developing enterprise-level dashboards using Vue 3 and Laravel. Implementing CI/CD pipelines with Docker.",
-    color: "primary",
-    icon: "mdi-briefcase",
-  },
-  {
-    year: "Oct 2024 - Jan 2026",
-    title: "Software Engineering Degree",
-    company: "Beltei International University",
-    description:
-      "Focused on Software Engineering, Data Structures, and Database Management Systems.",
-    color: "secondary",
-    icon: "mdi-school",
-  },
-  {
-    year: "Aug 2023 - Jan 2024",
-    title: "Software Engineer Intern",
-    company: "Sourceamax Asia",
-    link: "https://www.sourceamax.asia/",
-    description:
-      "Developing enterprise-level dashboards using Vue 3 and Laravel. Implementing CI/CD pipelines with Docker.",
-    color: "primary",
-    icon: "mdi-briefcase",
-  },
-  {
-    year: "Oct 2021 - Nov 2023",
-    title: "Computer Science Associate Degree",
-    company: "Passerelles numériques Cambodia",
-    link: "https://www.passerellesnumeriques.org/what-we-do/cambodia/",
-    description:
-      "Built custom WordPress themes and static sites for local small businesses.",
-    color: "secondary",
-    icon: "mdi-school",
-  },
-];
+import { ref, onMounted } from "vue";
+import { loadContent } from "../../api/content.api";
+
+onMounted(async () => {
+  const data = await loadContent();
+  if (data) {
+    history.value = data.about.history;
+  }
+});
+const history = ref({});
 </script>
 <template>
   <v-container id="about" class="about-section py-16">

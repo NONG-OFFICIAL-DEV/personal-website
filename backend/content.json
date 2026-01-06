@@ -1,0 +1,224 @@
+{
+  "home": {
+    "title": "Hi, I'm Nong",
+    "subtitle": "I craft scalable web applications using Vue 3 and Laravel.",
+    "photo": "personal-photo.jpg",
+    "social": [
+      {
+        "icon": "github",
+        "link": "https://github.com/Nong-Phloeut"
+      },
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/nong-phloeut-34314b275/"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/Nong-Phloeut"
+      },
+      {
+        "icon": "facebook",
+        "link": "https://instagram.com/Nong-Phloeut"
+      }
+    ]
+  },
+  "about": {
+    "text": "I’m a passionate web developer from Cambodia...",
+    "history": [
+      {
+        "year": "Feb 2024 - PRESENT",
+        "title": "Full Stack Developer",
+        "company": "Sourceamax Asia",
+        "link": "https://www.sourceamax.asia/",
+        "description": "Developing enterprise-level dashboards using Vue 3 and Laravel. Implementing CI/CD pipelines with Docker.",
+        "color": "primary",
+        "icon": "mdi-briefcase"
+      },
+      {
+        "year": "Oct 2024 - Jan 2026",
+        "title": "Software Engineering Degree",
+        "company": "Beltei International University",
+        "description": "Focused on Software Engineering, Data Structures, and Database Management Systems.",
+        "color": "secondary",
+        "icon": "mdi-school"
+      },
+      {
+        "year": "Aug 2023 - Jan 2024",
+        "title": "Software Engineer Intern",
+        "company": "Sourceamax Asia",
+        "link": "https://www.sourceamax.asia/",
+        "description": "Developing enterprise-level dashboards using Vue 3 and Laravel. Implementing CI/CD pipelines with Docker.",
+        "color": "primary",
+        "icon": "mdi-briefcase"
+      },
+      {
+        "year": "Oct 2021 - Nov 2023",
+        "title": "Computer Science Associate Degree",
+        "company": "Passerelles numériques Cambodia",
+        "link": "https://www.passerellesnumeriques.org/what-we-do/cambodia/",
+        "description": "Completed a two-year associate degree covering computer fundamentals, programming logic, algorithms, and problem-solving. Developed skills in software development, language proficiency (English & technical communication), and project management through team-based projects and real-world assignments.",
+        "color": "secondary",
+        "icon": "mdi-school"
+      }
+    ]
+  },
+  "skills": [
+    {
+      "name": "Vue 3",
+      "category": "frontend",
+      "level": "Expert",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+    },
+    {
+      "name": "Vuetify",
+      "category": "frontend",
+      "level": "Expert",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuetify/vuetify-original.svg"
+    },
+    {
+      "name": "JavaScript",
+      "category": "frontend",
+      "level": "Advanced",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+    },
+    {
+      "name": "Bootstrap",
+      "category": "frontend",
+      "level": "Advanced",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+    },
+    {
+      "name": "Laravel",
+      "category": "backend",
+      "level": "Expert",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
+    },
+    {
+      "name": "PHP",
+      "category": "backend",
+      "level": "Expert",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+    },
+    {
+      "name": "Node.js",
+      "category": "backend",
+      "level": "Intermediate",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+    },
+    {
+      "name": "Pyton",
+      "category": "backend",
+      "level": "Intermediate",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+    },
+    {
+      "name": "MySQL",
+      "category": "tools",
+      "level": "Advanced",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "tools",
+      "level": "Advanced",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+    },
+    {
+      "name": "Docker",
+      "category": "tools",
+      "level": "Intermediate",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+    },
+    {
+      "name": "Git",
+      "category": "tools",
+      "level": "Advanced",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Inventory Pro",
+      "description": "A full-scale warehouse management system with real-time stock tracking and automated PDF reporting.",
+      "tech": [
+        "Vue 3",
+        "Laravel",
+        "PostgreSQL",
+        "Vuetify",
+        "Docker",
+        "Git",
+        "PHP"
+      ],
+      "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800",
+      "github": "#",
+      "live": "#"
+    },
+    {
+      "title": "EduTrack System",
+      "description": "Comprehensive school management platform featuring attendance tracking, grade portals, and teacher schedules.",
+      "tech": [
+        "Vue 3",
+        "Vuetify",
+        "Firebase",
+        "Node.js"
+      ],
+      "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800",
+      "github": "#",
+      "live": "#"
+    },
+    {
+      "title": "Health-Sync API",
+      "description": "A Dockerized Laravel API for medical clinics, supporting secure patient data encryption and RESTful architecture.",
+      "tech": [
+        "Laravel",
+        "Docker",
+        "MySQL",
+        "Redis"
+      ],
+      "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800",
+      "github": "#",
+      "live": "#"
+    },
+    {
+      "title": "Inventory Pro",
+      "description": "A full-scale warehouse management system with real-time stock tracking and automated PDF reporting.",
+      "tech": [
+        "Vue 3",
+        "Laravel",
+        "PostgreSQL"
+      ],
+      "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800",
+      "github": "#",
+      "live": "#"
+    },
+    {
+      "title": "EduTrack System",
+      "description": "Comprehensive school management platform featuring attendance tracking, grade portals, and teacher schedules.",
+      "tech": [
+        "Vue 3",
+        "Vuetify",
+        "Node.js"
+      ],
+      "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800",
+      "github": "#",
+      "live": "#"
+    },
+    {
+      "title": "Health-Sync API",
+      "description": "A Dockerized Laravel API for medical clinics, supporting secure patient data encryption and RESTful architecture.",
+      "tech": [
+        "Laravel",
+        "Docker",
+        "MySQL"
+      ],
+      "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800",
+      "github": "#",
+      "live": "#"
+    }
+  ],
+  "contact": {
+    "email": "phloeutnong@gmail.com",
+    "phone": "+855 66 53 86 01",
+    "location": "Phnom Penh, Cambodia"
+  }
+}

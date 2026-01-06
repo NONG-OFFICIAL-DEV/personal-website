@@ -1,6 +1,9 @@
 <template>
+  <router-view />
+</template>
+
+<!-- <template>
   <v-app :theme="theme">
-    <!-- APP BAR -->
     <v-app-bar flat class="px-md-10 navbar-blur" border="b">
       <v-toolbar-title class="font-weight-bold">
         <span class="text-primary">&lt;</span>
@@ -10,7 +13,6 @@
 
       <v-spacer />
 
-      <!-- Desktop Nav -->
       <div class="hidden-sm-and-down">
         <v-btn
           v-for="item in navItems"
@@ -26,18 +28,15 @@
         </v-btn>
       </div>
 
-      <!-- Theme Toggle -->
       <v-btn icon @click="toggleTheme" class="ml-2">
         <v-icon>
           {{ theme === "light" ? "mdi-weather-night" : "mdi-weather-sunny" }}
         </v-icon>
       </v-btn>
 
-      <!-- Mobile Menu -->
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer" />
     </v-app-bar>
 
-    <!-- MOBILE DRAWER -->
     <v-navigation-drawer
       v-model="drawer"
       temporary
@@ -63,11 +62,12 @@
       </v-list>
     </v-navigation-drawer>
 
-    <!-- MAIN CONTENT -->
+
     <v-main>
       <div class="bg-glow"></div>
 
       <v-container fluid class="pa-0">
+        <router-view />
         <HomeSection id="home" />
         <AboutSection id="about" />
         <SkillsSection id="skills" />
@@ -76,7 +76,6 @@
       </v-container>
     </v-main>
 
-    <!-- FOOTER -->
     <v-footer
       border="t"
       class="justify-center py-4 text-body-2 text-medium-emphasis"
@@ -95,7 +94,6 @@ import SkillsSection from "./views/sections/SkillsSection.vue";
 import ProjectsSection from "./views/sections/ProjectsSection.vue";
 import ContactSection from "./views/sections/ContactSection.vue";
 
-/* ---------------- THEME ---------------- */
 const theme = ref("dark");
 const drawer = ref(false);
 
@@ -103,7 +101,6 @@ function toggleTheme() {
   theme.value = theme.value === "light" ? "dark" : "light";
 }
 
-/* ---------------- NAV ---------------- */
 const navItems = [
   { title: "Home", id: "home" },
   { title: "About", id: "about" },
@@ -114,7 +111,6 @@ const navItems = [
 
 const currentSection = ref("home");
 
-/* ---------------- SCROLL TO ---------------- */
 function scrollTo(id) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -124,11 +120,9 @@ function scrollTo(id) {
     block: "start",
   });
 
-  // immediate feedback on click
   currentSection.value = id;
 }
 
-/* ---------------- SCROLL SPY ---------------- */
 let observer;
 
 onMounted(() => {
@@ -159,19 +153,16 @@ onUnmounted(() => {
 </script>
 
 <style>
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Glassmorphism navbar */
 .navbar-blur {
   background-color: rgba(var(--v-theme-surface), 0.7) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
-/* Active nav underline */
 .v-btn.text-primary {
   position: relative;
 }
@@ -187,7 +178,6 @@ html {
   border-radius: 2px;
 }
 
-/* Glow background */
 .bg-glow {
   position: fixed;
   top: 0;
@@ -204,4 +194,4 @@ html {
   pointer-events: none;
   z-index: 0;
 }
-</style>
+</style> -->

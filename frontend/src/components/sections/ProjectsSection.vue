@@ -1,70 +1,23 @@
 <script setup>
-const projects = [
-  {
-    title: "Inventory Pro",
-    description:
-      "A full-scale warehouse management system with real-time stock tracking and automated PDF reporting.",
-    tech: ["Vue 3", "Laravel", "PostgreSQL", "Tailwind"],
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "EduTrack System",
-    description:
-      "Comprehensive school management platform featuring attendance tracking, grade portals, and teacher schedules.",
-    tech: ["Vue 3", "Vuetify", "Firebase", "Node.js"],
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Health-Sync API",
-    description:
-      "A Dockerized Laravel API for medical clinics, supporting secure patient data encryption and RESTful architecture.",
-    tech: ["Laravel", "Docker", "MySQL", "Redis"],
-    image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Inventory Pro",
-    description:
-      "A full-scale warehouse management system with real-time stock tracking and automated PDF reporting.",
-    tech: ["Vue 3", "Laravel", "PostgreSQL", "Tailwind"],
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "EduTrack System",
-    description:
-      "Comprehensive school management platform featuring attendance tracking, grade portals, and teacher schedules.",
-    tech: ["Vue 3", "Vuetify", "Firebase", "Node.js"],
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Health-Sync API",
-    description:
-      "A Dockerized Laravel API for medical clinics, supporting secure patient data encryption and RESTful architecture.",
-    tech: ["Laravel", "Docker", "MySQL", "Redis"],
-    image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800",
-    github: "#",
-    live: "#",
-  },
-];
+import { ref, onMounted } from "vue";
+import { loadContent } from "../../api/content.api";
+const isTouch = ref(false);
+onMounted(async () => {
+  isTouch.value = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  const data = await loadContent();
+  if (data) {
+    projects.value = data.projects;
+  }
+});
+const projects = ref([]);
 </script>
 
 <template>
-  <v-container id="projects" class="py-16 hero-section-bg overflow-hidden" fluid>
+  <v-container
+    id="projects"
+    class="py-16 hero-section-bg overflow-hidden"
+    fluid
+  >
     <!-- Background Blobs -->
     <div class="projects-blobs">
       <div class="blob-projects-1"></div>
@@ -74,7 +27,12 @@ const projects = [
     <v-row class="relative-content px-md-16">
       <!-- Section Header -->
       <v-col cols="12" class="text-center mb-12">
-        <v-chip color="primary" variant="tonal" size="small" class="mb-3 px-4 py-4">
+        <v-chip
+          color="primary"
+          variant="tonal"
+          size="small"
+          class="mb-3 px-4 py-4"
+        >
           <v-icon start icon="mdi-rocket-launch-outline" size="18" />
           My Portfolio
         </v-chip>
@@ -209,28 +167,40 @@ const projects = [
 
 <style scoped>
 /* --- Layout & Backgrounds --- */
-.hero-section-bg { position: relative; }
-.relative-content { z-index: 2; position: relative; }
+.hero-section-bg {
+  position: relative;
+}
+.relative-content {
+  z-index: 2;
+  position: relative;
+}
 
 .projects-blobs {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
 }
 .blob-projects-1 {
   position: absolute;
-  width: 600px; height: 600px;
+  width: 600px;
+  height: 600px;
   background: rgba(var(--v-theme-primary), 0.05);
   filter: blur(100px);
-  top: 20%; right: -300px;
+  top: 20%;
+  right: -300px;
   border-radius: 50%;
 }
 .blob-projects-2 {
   position: absolute;
-  width: 400px; height: 400px;
+  width: 400px;
+  height: 400px;
   background: rgba(var(--v-theme-secondary), 0.05);
   filter: blur(80px);
-  bottom: 10%; left: -200px;
+  bottom: 10%;
+  left: -200px;
   border-radius: 50%;
 }
 
@@ -266,8 +236,10 @@ const projects = [
 
 .overlay-reveal {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(var(--v-theme-primary), 0.8);
   backdrop-filter: blur(4px);
 }
@@ -278,7 +250,11 @@ const projects = [
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, rgb(var(--v-theme-primary)) 0%, #a855f7 100%);
+  background: linear-gradient(
+    135deg,
+    rgb(var(--v-theme-primary)) 0%,
+    #a855f7 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -304,17 +280,35 @@ const projects = [
 }
 
 @keyframes revealUp {
-  from { opacity: 0; transform: translateY(50px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes revealDown {
-  from { opacity: 0; transform: translateY(-30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
+.delay-1 {
+  animation-delay: 0.2s;
+}
+.delay-2 {
+  animation-delay: 0.4s;
+}
 
-.gap-2 { gap: 8px; }
+.gap-2 {
+  gap: 8px;
+}
 </style>
