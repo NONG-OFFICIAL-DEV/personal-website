@@ -1,14 +1,31 @@
-www.nongofficial.store {
-    root * /usr/share/caddy
-    file_server
-    encode gzip
+{
+    # Global options
+    email phloeutnong@example.com  # Used for SSL certificate expiry alerts
+}
 
-    # SPA fallback for Vue Router
+www.nongofficial.store, nongofficial.store {
+    root * /usr/share/caddy
+    encode zstd gzip  # Zstd is faster than Gzip
+    file_server
+
+    # Security Headers
+    header {
+        Strict-Transport-Security "max-age=31536000;"
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        Referrer-Policy no-referrer-when-downgrade
+    }
+
+    # Handle Vue Router (Redirect 404s to index.html)
     try_files {path} {path}/ /index.html
 
-    # Logging
+    # Backend API Proxy
+    handle /api* {
+        reverse_proxy backend:9090
+    }
+
+    # Custom Logging
     log {
-        output file /var/log/caddy/www-nongofficial.log
-        format json
+        output file /var/log/caddy/access.log
     }
 }

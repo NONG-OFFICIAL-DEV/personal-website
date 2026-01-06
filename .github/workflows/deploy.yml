@@ -19,12 +19,25 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Push Docker image
+        # ---------------- BACKEND ----------------
+      - name: Build & Push Backend
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./backend
+          file: ./backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/business-vue-web:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/business-backend:latest
+
+      # ---------------- FRONTEND ----------------
+      - name: Build & Push Frontend
+        uses: docker/build-push-action@v4
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/business-frontend:latest
 
   deploy:
     needs: build-and-push

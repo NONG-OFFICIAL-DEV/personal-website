@@ -1,24 +1,32 @@
-# ---------- Build stage ----------
-FROM node:20-alpine AS build
+# STEP 1: Build Vue Assets
+FROM node:20-bullseye AS build-stage
 
 WORKDIR /app
 
-# Copy package.json and install dependencies
-COPY package*.json ./
-RUN npm install
+# Install build tools
+RUN apt-get update && apt-get install -y python3 g++ make bash && rm -rf /var/lib/apt/lists/*
 
-# Copy all source code and build Vue
-COPY . .
+# Copy package files
+COPY frontend/package*.json ./
+
+# Install dependencies
+RUN npm install && npm install @rollup/rollup-linux-x64-musl
+
+# Copy source code
+COPY frontend/ ./
+
+# Build Vue
 RUN npm run build
 
-# ---------- Production stage ----------
+# STEP 2: Production Caddy
 FROM caddy:2.8.0-alpine
 
-# Copy Vue build output to Caddy root
-COPY --from=build /app/dist /usr/share/caddy
+WORKDIR /usr/share/caddy
 
-# Copy Caddyfile
+# Copy Vue build
+COPY --from=build-stage /app/dist /usr/share/caddy
+
+# Copy config
 COPY Caddyfile /etc/caddy/Caddyfile
 
-# Expose HTTP and HTTPS
 EXPOSE 80 443
