@@ -16,7 +16,7 @@ app.post("/api/save-content", (req, res) => {
   const content = req.body;
 
   fs.writeFile(
-    path.join(__dirname, "content.json"),
+    path.join(__dirname, "data/content.json"),
     JSON.stringify(content, null, 2),
     (err) => {
       if (err) {
@@ -30,7 +30,7 @@ app.post("/api/save-content", (req, res) => {
 
 // Endpoint to load content
 app.get("/api/load-content", (req, res) => {
-  fs.readFile(path.join(__dirname, "content.json"), "utf8", (err, data) => {
+  fs.readFile(path.join(__dirname, "data/content.json"), "utf8", (err, data) => {
     if (err) {
       console.error("Error reading file", err);
       return res.status(500).json({ message: "Failed to load JSON" });
