@@ -2,7 +2,7 @@ www.nongofficial.store {
     encode gzip
 
     # Backend API proxy must come first
-    handle_path /api/* {
+    handle /api/* {
         reverse_proxy website_api:9090
     }
 
