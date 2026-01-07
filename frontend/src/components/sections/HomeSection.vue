@@ -1,26 +1,30 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { loadContent } from "../../api/content.api";
+import { computed } from "vue";
 
-const content = ref({
-  home: {
-    title: "",
-    subtitle: "",
-    social: [],
+const props = defineProps({
+  content: {
+    type: Object,
+    default: () => ({
+      home: {
+        title: "",
+        subtitle: "",
+        social: [],
+      },
+    }),
   },
 });
 
-// Fetch content from JSON
-onMounted(async () => {
-  const data = await loadContent();
-  if (data) {
-    content.value = data;
-  }
+const homeContent = computed(() => props.content || {
+  title: "",
+  subtitle: "",
+  social: [],
 });
+
 </script>
 
 <template>
   <v-container id="home" class="fill-height hero-section" fluid>
+    <!-- {{ content }} -->
     <div class="blob-wrapper">
       <div class="blob blob-1"></div>
       <div class="blob blob-2"></div>
@@ -42,11 +46,11 @@ onMounted(async () => {
         </v-chip>
 
         <h1 class="display-title mb-4">
-          {{ content.home.title }}
+          {{ homeContent.title }}
         </h1>
 
         <p class="text-subtitle mb-10 animate-fade-up">
-          {{ content.home.subtitle }}
+          {{ homeContent.subtitle }}
         </p>
 
         <div class="d-flex flex-wrap gap-4 mb-12 animate-fade-up-delayed">
@@ -74,12 +78,14 @@ onMounted(async () => {
         </div>
 
         <div class="social-wrapper animate-fade-up-delayed-2">
-          <p class="text-caption font-weight-bold text-uppercase text-disabled mb-3">
+          <p
+            class="text-caption font-weight-bold text-uppercase text-disabled mb-3"
+          >
             Connect with me
           </p>
           <div class="d-flex gap-3">
             <v-btn
-              v-for="(icon, index) in content.home.social"
+              v-for="(icon, index) in homeContent.social"
               :key="index"
               :icon="`mdi-${icon.icon}`"
               variant="tonal"
@@ -118,7 +124,6 @@ onMounted(async () => {
     </v-row>
   </v-container>
 </template>
-
 
 <style scoped>
 .hero-section {
@@ -486,5 +491,4 @@ onMounted(async () => {
     opacity: 0.25;
   }
 }
-
 </style>

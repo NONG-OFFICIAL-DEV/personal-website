@@ -1,14 +1,18 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { loadContent } from "../../api/content.api";
 
-onMounted(async () => {
-  const data = await loadContent();
-  if (data) {
-    history.value = data.about.history;
-  }
+const props = defineProps({
+  content: {
+    type: Object,
+    default: () => ({
+      home: {
+        title: "",
+        subtitle: "",
+        social: [],
+      },
+    }),
+  },
 });
-const history = ref({});
+
 </script>
 <template>
   <v-container id="about" class="about-section py-16">
@@ -17,8 +21,7 @@ const history = ref({});
       <v-col cols="12" class="text-center mb-12 fade-up">
         <h2 class="text-h3 font-weight-bold gradient-text">About Me</h2>
         <p class="text-medium-emphasis mt-2">
-          A passionate developer dedicated to building high-performance web
-          applications.
+          {{content.text}}
         </p>
       </v-col>
 
@@ -65,7 +68,7 @@ const history = ref({});
       <v-col cols="12" md="7" class="fade-right">
         <v-timeline side="end" align="start" density="compact">
           <v-timeline-item
-            v-for="(item, i) in history"
+            v-for="(item, i) in content.history"
             :key="i"
             :dot-color="item.color"
             :icon="item.icon"

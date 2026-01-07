@@ -1,32 +1,70 @@
+<script setup>
+import { ref, reactive } from "vue";
+
+const props = defineProps({
+  content: {
+    type: Object,
+    default: () => ({}),
+  },
+});
+
+const isFormValid = ref(false);
+const loading = ref(false);
+const success = ref(false);
+
+const formData = reactive({
+  name: "",
+  email: "",
+  message: "",
+});
+
+const submitForm = async () => {
+  loading.value = true;
+  // Simulate API Call
+  setTimeout(() => {
+    loading.value = false;
+    success.value = true;
+    formData.name = "";
+    formData.email = "";
+    formData.message = "";
+  }, 1500);
+};
+</script>
 <template>
   <v-container id="contact" class="py-16">
     <v-row>
       <v-col cols="12" class="text-center mb-10">
         <h2 class="text-h3 font-weight-bold mb-2">Get In Touch</h2>
-        <p class="text-medium-emphasis">Have a project in mind? Let's build something amazing together.</p>
+        <p class="text-medium-emphasis">
+          Have a project in mind? Let's build something amazing together.
+        </p>
       </v-col>
 
       <v-col cols="12" md="4" class="mb-8 mb-md-0">
         <v-card variant="flat" class="bg-transparent">
           <h3 class="text-h5 font-weight-bold mb-6">Contact Information</h3>
-          
+
           <div class="d-flex align-center mb-6">
             <v-avatar color="primary-lighten-4" size="48" class="mr-4">
               <v-icon color="primary">mdi-email-outline</v-icon>
             </v-avatar>
             <div>
               <div class="text-caption text-medium-emphasis">Email Me</div>
-              <div class="text-body-1 font-weight-bold">{{contact.email}}</div>
+              <div class="text-body-1 font-weight-bold">
+                {{ content.email }}
+              </div>
             </div>
           </div>
-          
+
           <div class="d-flex align-center mb-6">
             <v-avatar color="primary-lighten-4" size="48" class="mr-4">
               <v-icon color="primary">mdi-phone-outline</v-icon>
             </v-avatar>
             <div>
               <div class="text-caption text-medium-emphasis">Contact Me</div>
-              <div class="text-body-1 font-weight-bold">{{contact.phone}}</div>
+              <div class="text-body-1 font-weight-bold">
+                {{ content.phone }}
+              </div>
             </div>
           </div>
 
@@ -36,16 +74,23 @@
             </v-avatar>
             <div>
               <div class="text-caption text-medium-emphasis">Location</div>
-              <div class="text-body-1 font-weight-bold">{{contact.location}}</div>
+              <div class="text-body-1 font-weight-bold">
+                {{ content.location }}
+              </div>
             </div>
           </div>
 
           <v-divider class="my-6"></v-divider>
-          
+
           <h4 class="text-subtitle-1 font-weight-bold mb-4">Follow My Work</h4>
           <div class="d-flex gap-2">
             <v-btn icon="mdi-github" variant="tonal" color="primary"></v-btn>
-            <v-btn icon="mdi-linkedin" variant="tonal" color="primary" class="mx-2"></v-btn>
+            <v-btn
+              icon="mdi-linkedin"
+              variant="tonal"
+              color="primary"
+              class="mx-2"
+            ></v-btn>
             <v-btn icon="mdi-twitter" variant="tonal" color="primary"></v-btn>
           </div>
         </v-card>
@@ -114,40 +159,6 @@
     </v-snackbar>
   </v-container>
 </template>
-
-<script setup>
-import { ref, reactive,onMounted } from 'vue'
-
-import { loadContent } from "../../api/content.api";
-onMounted(async () => {
-  const data = await loadContent();
-  if (data) {
-    contact.value = data.contact;
-  }
-});
-const contact = ref({});
-const isFormValid = ref(false)
-const loading = ref(false)
-const success = ref(false)
-
-const formData = reactive({
-  name: '',
-  email: '',
-  message: ''
-})
-
-const submitForm = async () => {
-  loading.value = true
-  // Simulate API Call
-  setTimeout(() => {
-    loading.value = false
-    success.value = true
-    formData.name = ''
-    formData.email = ''
-    formData.message = ''
-  }, 1500)
-}
-</script>
 
 <style scoped>
 .border-thin {

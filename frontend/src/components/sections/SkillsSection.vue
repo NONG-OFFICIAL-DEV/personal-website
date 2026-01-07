@@ -1,3 +1,22 @@
+<script setup>
+import { ref, computed } from "vue";
+const activeTab = ref("frontend");
+
+const props = defineProps({
+  content: {
+    type: Object,
+    default: () => ([]),
+  },
+});
+
+const groupedSkills = computed(() => {
+  return props.content.reduce((acc, skill) => {
+    if (!acc[skill.category]) acc[skill.category] = [];
+    acc[skill.category].push(skill);
+    return acc;
+  }, {});
+});
+</script>
 <template>
   <v-container id="skills" class="py-16">
     <div class="text-center mb-12">
@@ -63,26 +82,3 @@
   </v-container>
 </template>
 
-<script setup>
-import { ref, computed ,onMounted} from "vue";
-
-import { loadContent } from "../../api/content.api";
-const activeTab = ref("frontend");
-
-onMounted(async () => {
-  const data = await loadContent();
-  if (data) {
-    skills.value = data.skills;
-  }
-});
-const skills = ref([]);
-
-// Logic to group skills by their category property
-const groupedSkills = computed(() => {
-  return skills.value.reduce((acc, skill) => {
-    if (!acc[skill.category]) acc[skill.category] = [];
-    acc[skill.category].push(skill);
-    return acc;
-  }, {});
-});
-</script>

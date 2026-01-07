@@ -53,6 +53,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted, defineProps } from 'vue';
 
+const emit = defineEmits(['toggle-theme']);
+
 const props = defineProps({
   theme: { type: String, required: true }
 });

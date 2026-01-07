@@ -1,15 +1,15 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { loadContent } from "../../api/content.api";
 const isTouch = ref(false);
 onMounted(async () => {
   isTouch.value = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  const data = await loadContent();
-  if (data) {
-    projects.value = data.projects;
-  }
 });
-const projects = ref([]);
+const props = defineProps({
+  content: {
+    type: Object,
+    default: () => ({}),
+  },
+});
 </script>
 
 <template>
@@ -48,7 +48,7 @@ const projects = ref([]);
 
       <!-- Projects -->
       <v-col
-        v-for="(project, index) in projects"
+        v-for="(project, index) in content"
         :key="index"
         cols="12"
         sm="6"
