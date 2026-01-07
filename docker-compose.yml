@@ -3,8 +3,6 @@ services:
   website_api:
     image: nongdev/node-backend:latest
     restart: always
-    ports:
-      - "9090:9090"  # optional, if you want host access
     networks:
       - my-net
 

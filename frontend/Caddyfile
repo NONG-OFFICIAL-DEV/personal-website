@@ -8,7 +8,7 @@ www.nongofficial.store {
 
     # Backend API proxy
     handle /api/* {
-        reverse_proxy backend:9090
+        reverse_proxy website_api:9090
     }
 
     # Logging
