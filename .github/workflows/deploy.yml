@@ -1,4 +1,4 @@
-name: Build & Deploy Vue Docker
+name: Build & Deploy Vue + Node
 
 on:
   push:
@@ -10,66 +10,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+      - name: Docker Login
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build & push frontend
-        uses: docker/build-push-action@v5
-        with:
-          context: ./frontend
-          push: true
-          tags: nongdev/vue-frontend:latest
-
-      - name: Build & push backend
+      - name: Build & Push Backend
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           push: true
           tags: nongdev/node-backend:latest
 
+      - name: Build & Push Frontend (Vue + Caddy)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          tags: nongdev/vue-caddy:latest
+
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
 
     steps:
-      - name: SSH deploy
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker stop frontend || true
-            docker rm frontend || true
-            docker stop backend || true
-            docker rm backend || true
-            docker stop web || true
-            docker rm web || true
-
-            docker pull nongdev/vue-frontend:latest
-            docker pull nongdev/node-backend:latest
-            docker pull caddy:2-alpine
-
-            # Create Docker network if not exists
-            docker network create my-net || true
-
-            docker run -d --name backend --restart always nongdev/node-backend:latest
-            docker run -d --name frontend -p 80:80 --restart always nongdev/vue-frontend:latest
-
-            # Run Caddy (mount Vue build)
-            
-            docker run -d --name web -p 80:80 -p 443:443 \
-              -v /home/ubuntu/personal-website/caddy/Caddyfile:/etc/caddy/Caddyfile \
-              -v /home/ubuntu/personal-website/frontend/dist:/usr/share/caddy \
-              -v caddy_data:/data \
-              -v caddy_config:/config \
-              --network my-net \
-              --restart always \
-              caddy:2-alpine
-
+            cd /home/ubuntu/personal-website
+            docker compose pull
+            docker compose down
+            docker compose up -d

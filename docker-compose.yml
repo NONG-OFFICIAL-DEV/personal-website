@@ -1,24 +1,28 @@
-services:
-  frontend:
-    build: ./frontend
-    restart: unless-stopped
+version: "3.9"
 
+services:
   backend:
-    build: ./backend
-    restart: unless-stopped
+    image: nongdev/node-backend:latest
+    container_name: backend
+    restart: always
+    networks:
+      - my-net
 
   web:
-    image: caddy:2-alpine
+    image: nongdev/vue-caddy:latest
+    container_name: web
+    restart: always
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
-    depends_on:
-      - frontend
-      - backend
+    networks:
+      - my-net
+
+networks:
+  my-net:
 
 volumes:
   caddy_data:
