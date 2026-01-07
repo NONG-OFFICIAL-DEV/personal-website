@@ -1,9 +1,8 @@
-version: "3.9"
 
 services:
-  backend:
+  website_api:
     image: nongdev/node-backend:latest
-    container_name: backend
+    container_name: personal-website-api
     restart: always
     networks:
       - my-net
