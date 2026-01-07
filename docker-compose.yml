@@ -2,14 +2,14 @@
 services:
   website_api:
     image: nongdev/node-backend:latest
-    container_name: personal-website-api
+    # container_name: personal-website-api
     restart: always
     networks:
       - my-net
 
   web:
     image: nongdev/vue-caddy:latest
-    container_name: web
+    # container_name: personal-website
     restart: always
     ports:
       - "80:80"
