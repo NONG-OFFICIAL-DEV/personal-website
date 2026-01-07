@@ -224,7 +224,7 @@ const homeContent = computed(() => props.content || {
 
 /* --- Animations --- */
 .animate-pop-in {
-  animation: popIn 0.6s ease-out;
+  animation: popIn 0.s ease-out;
 }
 .animate-fade-up {
   animation: fadeUp 0.8s ease-out 0.2s both;

@@ -7,21 +7,45 @@ const path = require("path");
 const app = express();
 const PORT = 9090;
 
-// Enable CORS for your Vue frontend
 app.use(cors());
 app.use(bodyParser.json());
 
+const CONTENT_PATH = path.join(__dirname, "data/content.json");
+
+// ✅ Load once at startup
+let cachedContent = null;
+
+function loadContentFromDisk() {
+  try {
+    const raw = fs.readFileSync(CONTENT_PATH, "utf8");
+    cachedContent = JSON.parse(raw);
+    console.log("✅ Content loaded into memory");
+  } catch (err) {
+    console.error("❌ Failed to load content:", err);
+    cachedContent = {};
+  }
+}
+
+loadContentFromDisk();
+
+// Health check
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-// Endpoint to save content
+// Load content (FAST)
+app.get("/api/load-content", (req, res) => {
+  res.setHeader("Cache-Control", "public, max-age=300"); // 5 minutes
+  res.json(cachedContent);
+});
+
+// Save content + update cache
 app.post("/api/save-content", (req, res) => {
-  const content = req.body;
+  cachedContent = req.body;
 
   fs.writeFile(
-    path.join(__dirname, "data/content.json"),
-    JSON.stringify(content, null, 2),
+    CONTENT_PATH,
+    JSON.stringify(cachedContent, null, 2),
     (err) => {
       if (err) {
         console.error("Error writing file", err);
@@ -32,17 +56,6 @@ app.post("/api/save-content", (req, res) => {
   );
 });
 
-// Endpoint to load content
-app.get("/api/load-content", (req, res) => {
-  fs.readFile(path.join(__dirname, "data/content.json"), "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading file", err);
-      return res.status(500).json({ message: "Failed to load JSON" });
-    }
-    res.json(JSON.parse(data));
-  });
-});
-
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
