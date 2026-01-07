@@ -1,15 +1,17 @@
 www.nongofficial.store {
     encode gzip
 
-    # Backend API proxy must come first
+    # 1. Handle API requests first
     handle /api/* {
         reverse_proxy website_api:9090
     }
 
-    # Serve Vue SPA
-    root * /usr/share/caddy
-    file_server
-    try_files {path} {path}/ /index.html
+    # 2. Handle everything else (The SPA)
+    handle {
+        root * /usr/share/caddy
+        file_server
+        try_files {path} {path}/ /index.html
+    }
 
     # Logging
     log {
