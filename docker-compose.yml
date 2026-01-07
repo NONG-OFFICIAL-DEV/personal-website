@@ -2,14 +2,14 @@
 services:
   website_api:
     image: nongdev/node-backend:latest
-    # container_name: personal-website-api
     restart: always
+    ports:
+      - "9090:9090"  # optional, if you want host access
     networks:
       - my-net
 
   web:
     image: nongdev/vue-caddy:latest
-    # container_name: personal-website
     restart: always
     ports:
       - "80:80"
