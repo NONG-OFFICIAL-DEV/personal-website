@@ -286,6 +286,7 @@ const save = async () => {
     await saveContent(content.value);
     success.value = true;
     message.value = "Save Content successfully!";
+    await loadContent()
   } catch (e) {
     success.value = true;
     message.value = "Failed to save content";
