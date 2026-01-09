@@ -1,21 +1,5 @@
-www.nongofficial.store {
-    encode gzip
-
-    # 1. Handle API requests first
-    handle /api/* {
-        reverse_proxy website_api:9090
-    }
-
-    # 2. Handle everything else (The SPA)
-    handle {
-        root * /usr/share/caddy
-        file_server
-        try_files {path} {path}/ /index.html
-    }
-
-    # Logging
-    log {
-        output file /var/log/caddy/www-nongofficial.log
-        format json
-    }
+:80 {
+    root * /usr/share/caddy
+    file_server
+    try_files {path} {path}/ /index.html
 }
