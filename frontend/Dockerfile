@@ -9,8 +9,8 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# -------- Caddy --------
-FROM caddy:2-alpine
+# # -------- Caddy --------
+# FROM caddy:2-alpine
 
-COPY --from=build /app/dist /usr/share/caddy
-COPY Caddyfile /etc/caddy/Caddyfile
+# COPY --from=build /app/dist /usr/share/caddy
+# COPY Caddyfile /etc/caddy/Caddyfile
