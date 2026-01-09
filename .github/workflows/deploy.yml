@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_BACKEND: nongdev/node-backend
-      IMAGE_FRONTEND: nongdev/vue-caddy
+      IMAGE_FRONTEND: nongdev/frontend_website
       IMAGE_TAG: ${{ github.sha }}
 
     steps:
@@ -96,7 +96,7 @@ jobs:
 
             # Pull latest images
             docker pull nongdev/node-backend:latest
-            docker pull nongdev/vue-caddy:latest
+            docker pull nongdev/frontend_website:latest
 
             # Stop old containers
             docker compose down --remove-orphans || true

@@ -10,6 +10,14 @@ services:
       timeout: 5s
       retries: 5
 
+  frontend_website:
+    build:
+      context: ./frontend
+    image: nongdev/frontend_website:latest
+    restart: always
+    networks:
+      - web
+
 networks:
   web:
     external: true
