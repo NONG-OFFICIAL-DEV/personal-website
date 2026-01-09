@@ -14,12 +14,21 @@ const props = defineProps({
   },
 });
 
-const homeContent = computed(() => props.content || {
-  title: "",
-  subtitle: "",
-  social: [],
-});
+const homeContent = computed(
+  () =>
+    props.content || {
+      title: "",
+      subtitle: "",
+      social: [],
+    }
+);
 
+const scrollToProjects = () => {
+  const el = document.getElementById("projects");
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
+};
 </script>
 
 <template>
@@ -71,7 +80,7 @@ const homeContent = computed(() => props.content || {
             size="x-large"
             rounded="xl"
             class="cta-btn outline-btn text-capitalize px-8"
-            href="#projects"
+            @click="scrollToProjects"
           >
             View Projects
           </v-btn>
@@ -224,7 +233,7 @@ const homeContent = computed(() => props.content || {
 
 /* --- Animations --- */
 .animate-pop-in {
-  animation: popIn 0.s ease-out;
+  animation: popIn 0s ease-out;
 }
 .animate-fade-up {
   animation: fadeUp 0.8s ease-out 0.2s both;
